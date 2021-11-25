@@ -38,6 +38,23 @@ public class Stonks {
         StonkPrinter stonkPrinter = new StonkPrinter();
         stonkPrinter.printOverview(stonk);
 
+        System.out.println("Programm beenden (1) oder");
+        System.out.println("Details der der Aktie ausrechenen (2)");
+
+        if(scanner.nextInt() == 1) {
+           System.exit(0);
+        }
+        else {
+            System.out.println("Die Details sind noch nicht implementiert");
+        }
+
+        StonkCalculator calculator = new StonkCalculator();
+        calculator.calculateDetails(stonk);
+
+
+
+
+
         //langfristige Verbindlichkeiten
 
         // Eigenkapital

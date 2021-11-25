@@ -10,13 +10,12 @@ public class Stonk {
     private float div_adj_peg;
     private float cheap_price;
 
-    private int lt_liabilities;
-    private int equity;
+    private long lt_liabilities;
+    private long equity;
 
-    private int cash;
-    private int profit;
-    private double number_of_stocks;
-    private double cash_per_share;
+    private long cash;
+    private long otherCashItems ;
+    private long profit;
 
     public String getName() {
         return name;
@@ -68,7 +67,7 @@ public class Stonk {
         }
     }
 
-    public int getLt_liabilities() {
+    public long getLt_liabilities() {
         return lt_liabilities;
     }
 
@@ -76,15 +75,23 @@ public class Stonk {
         this.lt_liabilities = lt_liabilities;
     }
 
-    public int getEquity() {
+    public long getEquity() {
         return equity;
+    }
+
+    public long getOtherCashItems() {
+        return otherCashItems;
+    }
+
+    public void setOtherCashItems(long otherCashItems) {
+        this.otherCashItems = otherCashItems;
     }
 
     public void setEquity(int equity) {
         this.equity = equity;
     }
 
-    public int getCash() {
+    public long getCash() {
         return cash;
     }
 
@@ -92,7 +99,7 @@ public class Stonk {
         this.cash = cash;
     }
 
-    public int getProfit() {
+    public long getProfit() {
         return profit;
     }
 
@@ -100,21 +107,9 @@ public class Stonk {
         this.profit = profit;
     }
 
-    public double getNumber_of_stocks() {
-        return number_of_stocks;
-    }
 
-    public void calcNumber_of_stocks(double number_of_stocks) {
-        this.number_of_stocks = this.profit / this.eps;
-    }
 
-    public double getCash_per_share() {
-        return cash_per_share;
-    }
 
-    public void calcCash_per_share() {
-        this.cash_per_share = this.cash / this.number_of_stocks;
-    }
 
     public float getKgv() {
         return kgv;
@@ -148,6 +143,8 @@ public class Stonk {
         this.cheap_price = (this.growth + this.dividend) * this.eps;
     }
 
+
+
     public Stonk() {
     }
 
@@ -157,5 +154,6 @@ public class Stonk {
         calcDiv_adj_peg();
         calcCheap_price();
     }
+
 
 }
