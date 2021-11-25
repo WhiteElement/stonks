@@ -35,8 +35,8 @@ public class Stonks {
         System.out.println(stonk.getDividend());
 
 
-        print_part1(stonk);
-
+        StonkPrinter stonkPrinter = new StonkPrinter();
+        stonkPrinter.printOverview(stonk);
 
         //langfristige Verbindlichkeiten
 
@@ -51,20 +51,5 @@ public class Stonks {
 
     }
 
-    private static void print_part1(Stonk stonk) {
-        stonk.calcPart1();
-
-        System.out.println("\n" + stonk.getName());
-        System.out.println("Kurs:\t" + stonk.getValue());
-        System.out.println("EPS:\t" + stonk.getEps());
-        System.out.println("Gewinnwachstum:\t" + stonk.getGrowth());
-        System.out.println("Dividende:\t" + stonk.getDividend());
-        System.out.println("\n--------------------\n");
-
-        System.out.println("KGV:\t" + Math.round(stonk.getKgv() * 10.0)/10.0);
-        System.out.println("PEG:\t" + Math.round(stonk.getPeg() * 10.0)/10.0);
-        System.out.println("Div. adj. PEG:\t" + Math.round(stonk.getDiv_adj_peg() * 10.0)/10.0);
-        System.out.println("Die Aktie ist preiswert ab:\t" + Math.round(stonk.getCheap_price()* 10.0)/10.0);
-    }
 
 }
