@@ -71,7 +71,7 @@ public class Stonk {
         return lt_liabilities;
     }
 
-    public void setLt_liabilities(int lt_liabilities) {
+    public void setLt_liabilities(long lt_liabilities) {
         this.lt_liabilities = lt_liabilities;
     }
 
@@ -87,7 +87,7 @@ public class Stonk {
         this.otherCashItems = otherCashItems;
     }
 
-    public void setEquity(int equity) {
+    public void setEquity(long equity) {
         this.equity = equity;
     }
 
@@ -95,7 +95,7 @@ public class Stonk {
         return cash;
     }
 
-    public void setCash(int cash) {
+    public void setCash(long cash) {
         this.cash = cash;
     }
 
@@ -103,7 +103,7 @@ public class Stonk {
         return profit;
     }
 
-    public void setProfit(int profit) {
+    public void setProfit(long profit) {
         this.profit = profit;
     }
 

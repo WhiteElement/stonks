@@ -1,3 +1,5 @@
+import static java.lang.String.format;
+
 public class StonkPrinter {
 
     StonkPrinter() {
@@ -19,6 +21,11 @@ public class StonkPrinter {
 
     public void calcOverview(Stonk s) {
         s.calcPart1();
+    }
+
+    public String formatThousandSeperator(long number) {
+       String s = String.format("%,d", number);
+       return s;
     }
 
     public void printOverview(Stonk s) {

@@ -2,8 +2,8 @@ public class StonkCalculator {
 
     private float equityDebtRatio;
     private long totalCash;
-    private double numOfShares;
-    private double cashPerShare;
+    private long numOfShares;
+    private float cashPerShare;
 
     public StonkCalculator() {}
 
@@ -13,7 +13,7 @@ public class StonkCalculator {
 
     public void calcEquityDebtRatio(Stonk stonk) {
         long equity = stonk.getEquity();
-        this.equityDebtRatio = equity / (equity + stonk.getLt_liabilities());
+        this.equityDebtRatio = ((float) equity / (equity + stonk.getLt_liabilities())) * 100;
     }
 
     public long getTotalCash() {
@@ -24,15 +24,15 @@ public class StonkCalculator {
         this.totalCash = stonk.getCash() + stonk.getOtherCashItems();
     }
 
-    public double getNumOfShares() {
+    public long getNumOfShares() {
         return numOfShares;
     }
 
     public void calcNumOfShares(Stonk stonk) {
-        this.numOfShares = stonk.getProfit() / stonk.getEps();
+        this.numOfShares = (long) (stonk.getProfit() / stonk.getEps());
     }
 
-    public double getCashPerShare() {
+    public float getCashPerShare() {
         return cashPerShare;
     }
 

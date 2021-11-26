@@ -45,28 +45,38 @@ public class Stonks {
            System.exit(0);
         }
         else {
-            System.out.println("Die Details sind noch nicht implementiert");
+            System.out.println("Wie hoch sind die langfristigen Verbindlichkeiten?");
+            stonk.setLt_liabilities(scanner.nextLong());
+            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getLt_liabilities()));
+
+
+            System.out.println("Wie hoch ist das Eigenkapital?");
+            stonk.setEquity(scanner.nextLong());
+            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getEquity()));
+
+            System.out.println("Wie viel Cash halten Sie?");
+            stonk.setCash(scanner.nextLong());
+            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getCash()));
+
+            System.out.println("Wie viel sonstiges Cash haben sie?");
+            stonk.setOtherCashItems(scanner.nextLong());
+            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getCash()));
+
+            System.out.println("Wie hoch war der Gewinn?");
+            stonk.setProfit(scanner.nextLong());
+            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getProfit()));
+
         }
 
         StonkCalculator calculator = new StonkCalculator();
         calculator.calculateDetails(stonk);
 
-
-
-
-
-        //langfristige Verbindlichkeiten
-
-        // Eigenkapital
-
-
-        //Cash und andere Cashpositionen
-
-        //Aktienanzahl ausrechnen durch teilen durch Gewinn
-
-        //Output
-
+        System.out.println("EquityDebtRatio " + calculator.getEquityDebtRatio());
+        System.out.println("Total Cash " + stonkPrinter.formatThousandSeperator(calculator.getTotalCash()));
+        System.out.println("Number of shares " + stonkPrinter.formatThousandSeperator(calculator.getNumOfShares()));
+        System.out.println("Cash per Share " + stonkPrinter.roundToOneDec(calculator.getCashPerShare()));
     }
-
-
 }
+
+
+
