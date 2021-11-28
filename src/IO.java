@@ -1,20 +1,16 @@
 import java.util.Scanner;
 
-public class Stonks {
+public class IO {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Stonk stonk = new Stonk();
 
 
         //Welche Aktie
-        System.out.println("Um Welche Aktie geht es?");
-        stonk.setName(scanner.nextLine());
-        System.out.println(stonk.getName());
+        collectInputTo("Um Welche Aktie geht es?", scanner, stonk);
 
         //aktueller Kurs
-        System.out.println("Was ist der aktuelle Kurs?");
-        stonk.setValue(scanner.nextFloat());
-        System.out.println(stonk.getValue());
+        collectInputTo("Was ist der aktuelle Kurs?");
 
         // EPS
         System.out.println("Was ist sind die aktuellen EPS?");
@@ -75,6 +71,12 @@ public class Stonks {
         System.out.println("Total Cash " + stonkPrinter.formatThousandSeperator(calculator.getTotalCash()));
         System.out.println("Number of shares " + stonkPrinter.formatThousandSeperator(calculator.getNumOfShares()));
         System.out.println("Cash per Share " + stonkPrinter.roundToOneDec(calculator.getCashPerShare()));
+    }
+
+    private static void collectInputTo(String question, Scanner scanner, Stonk stonk) {
+        System.out.println(question);
+        stonk.setName(scanner.nextLine());
+        System.out.println(stonk.getName() + "\n");
     }
 }
 
