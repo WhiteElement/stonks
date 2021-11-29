@@ -1,35 +1,25 @@
-import java.util.Scanner;
+import javafx.util.Pair;
+
+import java.util.*;
 
 public class IO {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Stonk stonk = new Stonk();
 
+        Map<String, Runnable> baseMetrix = new LinkedHashMap<String, Runnable>();
+        baseMetrix.put("Um welche Aktie handelt es sich", () -> stonk.setName(scanner.nextLine()));
+        baseMetrix.put("Was ist der aktuelle Kurs?", () -> stonk.setValue(scanner.nextFloat()));
+        baseMetrix.put("Was sind die aktuellen EPS?", () -> stonk.setEps(scanner.nextFloat()));
+        baseMetrix.put("Wie hoch ist das Wachstum?", () -> stonk.setGrowth(scanner.nextFloat()));
+        baseMetrix.put("Wie hoch ist die Dividende?", () -> stonk.setDividend(scanner.nextFloat()));
+        baseMetrix.put("Um welche Aktie handelt es sich", () -> stonk.setName(scanner.nextLine()));
 
-        //Welche Aktie
-        collectInputTo("Um Welche Aktie geht es?", scanner, stonk);
 
-        //aktueller Kurs
-        collectInputTo("Was ist der aktuelle Kurs?");
-
-        // EPS
-        System.out.println("Was ist sind die aktuellen EPS?");
-        stonk.setEps(scanner.nextFloat());
-        System.out.println(stonk.getEps());
-
-        //Auswahl geschätztes Wachstum oder Durchschnitt mehrerer Jahre
-        System.out.println("Möchtest du ein Wachstum eingeben(1) oder soll ich über die letzten Jahre mitteln(2: noch nicht impl.)?");
-        if(scanner.nextInt() == 1) {
-            System.out.println("Wie hoch ist das Wachstum?");
-            stonk.setGrowth(scanner.nextFloat());
-            System.out.println(stonk.getGrowth());
+        for(Map.Entry<String,Runnable> entry : baseMetrix.entrySet()) {
+            System.out.println(entry.getKey());
+            entry.getValue().run();
         }
-
-        // Dividende
-        System.out.println("Wie hoch ist die Dividende?");
-        stonk.setDividend(scanner.nextFloat());
-        System.out.println(stonk.getDividend());
-
 
         StonkPrinter stonkPrinter = new StonkPrinter();
         stonkPrinter.printOverview(stonk);
@@ -41,27 +31,17 @@ public class IO {
            System.exit(0);
         }
         else {
-            System.out.println("Wie hoch sind die langfristigen Verbindlichkeiten?");
-            stonk.setLt_liabilities(scanner.nextLong());
-            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getLt_liabilities()));
+            Map<String,Runnable> balanceSheetMetrix = new LinkedHashMap<String,Runnable>();
+            balanceSheetMetrix.put("Wie hoch sind die langfristigen Verbindlichkeiten?",() -> stonk.setLt_liabilities(scanner.nextLong()));
+            balanceSheetMetrix.put("Wie hoch ist das Eigenkapital?", () -> stonk.setEquity(scanner.nextLong()));
+            balanceSheetMetrix.put("Wie viel Cash halten Sie?", () -> stonk.setCash(scanner.nextLong()));
+            balanceSheetMetrix.put("Wie viel sonstiges Cash haben sie?", () -> stonk.setOtherCashItems(scanner.nextLong()));
+            balanceSheetMetrix.put("Wie hoch war der Gewinn?", () -> stonk.setProfit(scanner.nextLong()));
 
-
-            System.out.println("Wie hoch ist das Eigenkapital?");
-            stonk.setEquity(scanner.nextLong());
-            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getEquity()));
-
-            System.out.println("Wie viel Cash halten Sie?");
-            stonk.setCash(scanner.nextLong());
-            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getCash()));
-
-            System.out.println("Wie viel sonstiges Cash haben sie?");
-            stonk.setOtherCashItems(scanner.nextLong());
-            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getCash()));
-
-            System.out.println("Wie hoch war der Gewinn?");
-            stonk.setProfit(scanner.nextLong());
-            System.out.println(stonkPrinter.formatThousandSeperator(stonk.getProfit()));
-
+            for(Map.Entry<String,Runnable> entry : balanceSheetMetrix.entrySet()) {
+                System.out.println(entry.getKey());
+                entry.getValue().run();
+            }
         }
 
         StonkCalculator calculator = new StonkCalculator();
@@ -73,11 +53,6 @@ public class IO {
         System.out.println("Cash per Share " + stonkPrinter.roundToOneDec(calculator.getCashPerShare()));
     }
 
-    private static void collectInputTo(String question, Scanner scanner, Stonk stonk) {
-        System.out.println(question);
-        stonk.setName(scanner.nextLine());
-        System.out.println(stonk.getName() + "\n");
-    }
 }
 
 
